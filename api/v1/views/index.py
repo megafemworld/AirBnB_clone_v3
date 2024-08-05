@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
-"""index of the views"""
-from flask import Flask, Blueprint, jsonify
+"""index of the API connection"""
 from api.v1.views import app_views
 
 

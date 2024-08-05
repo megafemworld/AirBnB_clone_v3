@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" API MAIN """
+""" API MAIN handles connection """
 
 from flask import Flask, Blueprint
 from models import storage
