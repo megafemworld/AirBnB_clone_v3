@@ -81,6 +81,14 @@ if models.storage_t == 'db':
             """
             pass
 
+        def test_count(self):
+            """ tests storage count method"""
+            pass
+
+        def test_get(self):
+            """ tests storage get method """
+            pass
+
         def test_new(self):
             """test that new adds an object to the database"""
             pass
