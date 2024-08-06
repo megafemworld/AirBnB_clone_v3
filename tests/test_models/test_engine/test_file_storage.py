@@ -71,12 +71,41 @@ test_file_storage.py'])
 if models.storage_t != "db":
     class TestFileStorage(unittest.TestCase):
         """Test the FileStorage class"""
+        @classmethod
+        def setUpClass(cls):
+            """ set up class """
+            cls.storage = models.storage
+
         def test_all_returns_dict(self):
             """Test that all returns the FileStorage.__objects attr"""
             storage = FileStorage()
             new_dict = storage.all()
             self.assertEqual(type(new_dict), dict)
             self.assertIs(new_dict, storage._FileStorage__objects)
+
+        def test_count(self):
+            """ test file storage count method"""
+            old_all_count = self.storage.count()
+            Class = classes["State"]
+            old_obj_count = self.storage.count(Class)
+            obj = Class(name="Abuja")
+            obj.save()
+            new_all_count = self.storage.count()
+            new_obj_count = self.storage.count(Class)
+
+            with self.subTest():
+                self.assertEqual(old_all_count, new_all_count - 1,
+                                 msg="test all count check failed")
+                self.assertEqual(old_obj_count, new_obj_count - 1,
+                                 msg="test obj count check failed")
+
+        def test_get(self):
+            """ test file storage get method"""
+            Class = classes["State"]
+            new_obj = Class(name="Bauchi")
+            new_obj.save()
+            obj_in_storage = self.storage.get(Class, new_obj.id)
+            self.assertTrue(new_obj.id == getattr(obj_in_storage, "id", None))
 
         def test_new(self):
             """test that new adds an object to the
