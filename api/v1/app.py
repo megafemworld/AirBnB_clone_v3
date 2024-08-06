@@ -12,16 +12,18 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def tear_down_appcontext():
+def tear_down_appcontext(exception):
     """tear down app context"""
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
+    """404 response"""
     return make_response(jsonify({'error': 'Not found'}))
 
 
 if __name__ == "__main__":
     app.run(host=os.getenv('HBNB_API_HOST', '0.0.0.0'),
-            port=int(os.getenv('HBNB_API_PORT', '5000')))
+            port=int(os.getenv('HBNB_API_PORT', '5000')),
+            threaded=True)
