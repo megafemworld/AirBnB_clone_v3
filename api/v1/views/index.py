@@ -22,7 +22,7 @@ def status_api():
     """API status"""
     return jsonify({"status": "OK"})
 
-@app_views.route('/stats' strict_slashes=False)
+@app_views.route("/stats", strict_slashes=False)
 def show_stats():
     """show the count of object"""
     dict_stat = {}
