@@ -16,9 +16,11 @@ def tear_down_appcontext():
     """tear down app context"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}))
+
 
 if __name__ == "__main__":
     app.run(host=os.getenv('HBNB_API_HOST', '0.0.0.0'),

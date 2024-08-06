@@ -71,6 +71,7 @@ test_db_storage.py'])
 if models.storage_t == 'db':
     class TestDbStorage(unittest.TestCase):
         """Test the FileStorage class"""
+
         def test_all_returns_dict(self):
             """Test that all returns a dictionaty"""
             self.assertIs(type(models.storage.all()), dict)

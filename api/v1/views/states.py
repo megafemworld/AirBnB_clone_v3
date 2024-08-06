@@ -42,7 +42,7 @@ def create_state():
     r = None
     try:
         r = request.get_json()
-    except:
+    except BaseException:
         r = None
     if r is None:
         return "Not a JSON", 400
@@ -58,7 +58,7 @@ def update_state(state_id=None):
     """Example endpoint updates a state"""
     try:
         r = request.get_json()
-    except:
+    except BaseException:
         r = None
     if r is None:
         return "Not a JSON", 400

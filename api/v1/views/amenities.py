@@ -35,7 +35,7 @@ def create_amenity():
     """Example endpoint Creates an amenity"""
     try:
         r = request.get_json()
-    except:
+    except BaseException:
         r = None
     if r is None:
         return "Not a JSON", 400
@@ -52,7 +52,7 @@ def update_amenity(amenity_id=None):
     """Example endpoint updates an amenity"""
     try:
         r = request.get_json()
-    except:
+    except BaseException:
         r = None
     if r is None:
         return "Not a JSON", 400
