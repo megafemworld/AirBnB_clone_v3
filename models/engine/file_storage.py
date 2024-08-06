@@ -12,6 +12,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
@@ -55,7 +56,7 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
+        except Exception:
             pass
 
     def delete(self, obj=None):
@@ -69,7 +70,7 @@ class FileStorage:
         """call reload() method for deserializing the JSON file to objects"""
         self.reload()
 
-    def get(self, cls, id_):
+    def get(self, cls, id):
         """
         Retrieve one object
 
@@ -80,12 +81,10 @@ class FileStorage:
         Return:
            object of cls and id passed in argument
         """
-        if (cls not in self.__models_available.keys()) or (id_ is None):
-            return None
-        all_objs = self.all(cls)
-        for k in all_objs.keys():
-            if k == id_:
-                return all_objs[k]
+        all_cls_objs = self.all(cls)
+        if all_cls_objs:
+            obj_key = cls.__name__ + '.' + id
+            return all_cls_objs[obj_key]
         return None
 
     def count(self, cls=None):
@@ -99,8 +98,4 @@ class FileStorage:
             number of objects in that class or in total.
             -1 if the class is not valid
         """
-        if cls is None:
-            return len(self.__objects)
-        if cls in self.__models_available:
-            return len(self.all(cls))
-        return -1
+        return len(self.all(cls))
