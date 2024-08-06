@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This is module cities"""
+"""This is module cities it help to bring out """
 
 from api.v1.views import (app_views, City, storage)
 from flask import (abort, jsonify, request)
